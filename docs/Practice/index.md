@@ -1,24 +1,24 @@
 ---
-title: "实践篇"
+title: "實踐篇"
 ---
 
-# 实践篇
+# 實踐篇
 
-通过实战项目，将理论知识转化为实际能力。
+通過實戰項目，將理論知識轉化爲實際能力。
 
-## 基础板块
+## 基礎板塊
 
-按不同受众提供针对性的入门项目：
+按不同受衆提供針對性的入門項目：
 
-- [文科生/商科生项目](./01-for-liberal-arts/) —— 内容创作、数据展示类项目
-- [理工科学生项目](./02-for-stem/) —— 算法可视化、数据处理类项目
-- [职场人士项目](./03-for-professionals/) —— 工作流自动化、效率提升类项目
+- [文科生/商科生項目](./01-for-liberal-arts/) —— 內容創作、數據展示類項目
+- [理工科學生項目](./02-for-stem/) —— 算法可視化、數據處理類項目
+- [職場人士項目](./03-for-professionals/) —— 工作流自動化、效率提升類項目
 
-## 进阶板块
+## 進階板塊
 
-基于 Sean's Stories "You Can Build Anything" 系列，深入学习全栈开发：
+基於 Sean's Stories "You Can Build Anything" 系列，深入學習全棧開發：
 
-- [核心技能](./10-core-skills/) —— 上线应用、数据库、后端部署、用户认证
-- [AI Agent 开发](./11-ai-agents/) —— RAG、向量数据库、MCP 集成
-- [全栈项目实战](./12-fullstack-projects/) —— SaaS、地图应用、移动应用
-- [工具与效率](./13-tools-integration/) —— n8n、GitHub 工作流、React/TS 进阶
+- [核心技能](./10-core-skills/) —— 上線應用、數據庫、後端部署、用戶認證
+- [AI Agent 開發](./11-ai-agents/) —— RAG、向量數據庫、MCP 集成
+- [全棧項目實戰](./12-fullstack-projects/) —— SaaS、地圖應用、移動應用
+- [工具與效率](./13-tools-integration/) —— n8n、GitHub 工作流、React/TS 進階

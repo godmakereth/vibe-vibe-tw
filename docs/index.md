@@ -2,38 +2,38 @@
 layout: home
 hero:
   name: "Vibe Vibe"
-  text: "人人都能学会的 AI 编程"
-  tagline: "不写代码，也能做产品。从零基础到全栈开发，让 AI 成为你的编程搭档"
+  text: "人人都能學會的 AI 編程"
+  tagline: "不寫代碼，也能做產品。從零基礎到全棧開發，讓 AI 成爲你的編程搭檔"
   image:
     src: /logo.png
     alt: Vibe Coding
   actions:
     - theme: brand
-      text: 零基础入门
+      text: 零基礎入門
       link: /Basic/
     - theme: alt
-      text: 有基础进阶
+      text: 有基礎進階
       link: /Advanced/
     - theme: alt
-      text: 动手做项目
+      text: 動手做項目
       link: /Practice/
     - theme: alt
-      text: 优质好文章
+      text: 優質好文章
       link: /Articles/
 
 features:
-  - title: 零基础友好
-    details: 不需要任何编程经验，从"什么是代码"开始，手把手带你做出第一个作品
-  - title: AI 驱动开发
-    details: 学会"指挥 AI 写代码"而不是"自己写代码"，用自然语言描述需求，让 AI 帮你实现
-  - title: MVP 思维
-    details: 掌握"最小可行产品"理念，用最少的时间验证你的想法，避免功能蔓延的陷阱
-  - title: 现代技术栈
-    details: 进阶篇基于 Next.js + TypeScript + Prisma，学习企业级全栈开发最佳实践
-  - title: 安全意识
-    details: 从第一天就建立安全底线意识，学会保护用户数据和避免常见安全漏洞
-  - title: 渐进式学习
-    details: 基础篇建立认知，进阶篇深入实战。两条路径，适合不同阶段的你
+  - title: 零基礎友好
+    details: 不需要任何編程經驗，從"什麼是代碼"開始，手把手帶你做出第一個作品
+  - title: AI 驅動開發
+    details: 學會"指揮 AI 寫代碼"而不是"自己寫代碼"，用自然語言描述需求，讓 AI 幫你實現
+  - title: MVP 思維
+    details: 掌握"最小可行產品"理念，用最少的時間驗證你的想法，避免功能蔓延的陷阱
+  - title: 現代技術棧
+    details: 進階篇基於 Next.js + TypeScript + Prisma，學習企業級全棧開發最佳實踐
+  - title: 安全意識
+    details: 從第一天就建立安全底線意識，學會保護用戶數據和避免常見安全漏洞
+  - title: 漸進式學習
+    details: 基礎篇建立認知，進階篇深入實戰。兩條路徑，適合不同階段的你
 ---
 
 <style>
@@ -70,149 +70,149 @@ features:
 }
 </style>
 
-## 选择你的学习路径
+## 選擇你的學習路徑
 
 <div class="paths-container" style="display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap;">
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 12px; background: linear-gradient(135deg, #667eea11 0%, #764ba211 100%); border: 1px solid #667eea33;">
 
-### 基础篇：零基础入门
+### 基礎篇：零基礎入門
 
-**适合人群**：从未写过代码的小白、文科生、设计师、产品经理
+**適合人羣**：從未寫過代碼的小白、文科生、設計師、產品經理
 
-**学习目标**：
-- 理解 Vibe Coding 是什么
-- 学会用 AI 做出你的第一个作品
-- 掌握 MVP 思维和产品感
+**學習目標**：
+- 理解 Vibe Coding 是什麼
+- 學會用 AI 做出你的第一個作品
+- 掌握 MVP 思維和產品感
 
-**章节预览**：
-| 章节 | 内容 |
+**章節預覽**：
+| 章節 | 內容 |
 |------|------|
-| 0. 序章 | 自测清单、学习路径规划 |
-| 1. 觉醒 | 从码农到指挥官的思维转变 |
-| 2. 心法 | MVP 思维、不加功能的艺术 |
-| 3. 技法 | 提示词工程、PRD 编写 |
-| 4. 实战 | 从 0 到 1 做出你的作品 |
-| 5. 进阶 | 版本控制、部署、安全意识 |
-| 6. 路径 | 不同背景的学习建议 |
+| 0. 序章 | 自測清單、學習路徑規劃 |
+| 1. 覺醒 | 從碼農到指揮官的思維轉變 |
+| 2. 心法 | MVP 思維、不加功能的藝術 |
+| 3. 技法 | 提示詞工程、PRD 編寫 |
+| 4. 實戰 | 從 0 到 1 做出你的作品 |
+| 5. 進階 | 版本控制、部署、安全意識 |
+| 6. 路徑 | 不同背景的學習建議 |
 
 
 </div>
 
 <div style="flex: 1; min-width: 300px; padding: 1.5rem; border-radius: 12px; background: linear-gradient(135deg, #f093fb11 0%, #f5576c11 100%); border: 1px solid #f093fb33;">
 
-### 进阶篇：全栈实战
+### 進階篇：全棧實戰
 
-**适合人群**：有一定编程基础、想系统学习全栈开发的开发者
+**適合人羣**：有一定編程基礎、想系統學習全棧開發的開發者
 
-**学习目标**：
-- 掌握 Next.js 现代全栈架构
-- 学会企业级工程化实践
-- 具备独立开发完整产品的能力
+**學習目標**：
+- 掌握 Next.js 現代全棧架構
+- 學會企業級工程化實踐
+- 具備獨立開發完整產品的能力
 
-**章节预览**：
-| 章节 | 内容 |
+**章節預覽**：
+| 章節 | 內容 |
 |------|------|
-| Bootcamp | 计算机基础、命令行、开发环境 |
-| 1-2. 架构 | Next.js + TypeScript + Prisma |
-| 3-4. 开发 | 前后端开发、数据库设计 |
-| 5-6. 产品 | 产品思维、认证与安全 |
-| 7-8. 规范 | API 设计、Git 协作流程 |
-| 9-10. 质量 | 测试策略、部署运维 |
-| 11-12. 进阶 | 发布流程、高级优化 |
+| Bootcamp | 計算機基礎、命令行、開發環境 |
+| 1-2. 架構 | Next.js + TypeScript + Prisma |
+| 3-4. 開發 | 前後端開發、數據庫設計 |
+| 5-6. 產品 | 產品思維、認證與安全 |
+| 7-8. 規範 | API 設計、Git 協作流程 |
+| 9-10. 質量 | 測試策略、部署運維 |
+| 11-12. 進階 | 發佈流程、高級優化 |
 
 
 </div>
 
 </div>
 
-## 项目状态
+## 項目狀態
 
-::: warning 内部预览版本
-- 本版本为**内部预览版**，并非正式发行版本，不代表最终品质
-- 正式版本需要等待后续对每一个章节进行深度优化、补充互动教学内容、以及完善实战练习环节
-- 如发现问题欢迎通过 [GitHub Issues](https://github.com/datawhalechina/vibe-vibe/issues) 反馈
+::: warning 內部預覽版本
+- 本版本爲**內部預覽版**，並非正式發行版本，不代表最終品質
+- 正式版本需要等待後續對每一個章節進行深度優化、補充互動教學內容、以及完善實戰練習環節
+- 如發現問題歡迎通過 [GitHub Issues](https://github.com/datawhalechina/vibe-vibe/issues) 反饋
 :::
 
-::: tip 进阶版预告：Web 互动教学
-我们正在开发**交互式教学内容**，正式版将支持：
-- **可视化原理演示** —— 通过动画和交互图解，直观理解前后端交互、请求响应流程
-- **数据库交互沙盒** —— 在浏览器中体验数据库查询、表关系设计，理解数据流转
-- **架构图解互动** —— 点击探索系统架构，理解各层职责和数据走向
-- **概念对比卡片** —— 交互式对比 SSR/CSR、REST/GraphQL 等核心概念
+::: tip 進階版預告：Web 互動教學
+我們正在開發**交互式教學內容**，正式版將支持：
+- **可視化原理演示** —— 通過動畫和交互圖解，直觀理解前後端交互、請求響應流程
+- **數據庫交互沙盒** —— 在瀏覽器中體驗數據庫查詢、表關係設計，理解數據流轉
+- **架構圖解互動** —— 點擊探索系統架構，理解各層職責和數據走向
+- **概念對比卡片** —— 交互式對比 SSR/CSR、REST/GraphQL 等核心概念
 
-让抽象概念变得可触摸，敬请期待！
+讓抽象概念變得可觸摸，敬請期待！
 :::
 
-## 什么是 Vibe Coding？
+## 什麼是 Vibe Coding？
 
 > "There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists."
 > 
 > — Andrej Karpathy, 2025
 
-**Vibe Coding** 是 2025 年最火的编程方式（Collins 词典年度词汇）。它的核心理念是：
+**Vibe Coding** 是 2025 年最火的編程方式（Collins 詞典年度詞彙）。它的核心理念是：
 
-- **用自然语言描述需求**，而不是手写代码
-- **让 AI 生成代码**，你来验收和调整
-- **快速迭代**，做出能用的东西比代码完美更重要
+- **用自然語言描述需求**，而不是手寫代碼
+- **讓 AI 生成代碼**，你來驗收和調整
+- **快速迭代**，做出能用的東西比代碼完美更重要
 
-简单说：**你负责想法，AI 负责实现。**
+簡單說：**你負責想法，AI 負責實現。**
 
-## 适合谁学习？
+## 適合誰學習？
 
-| 你是谁 | 推荐路径 | 理由 |
+| 你是誰 | 推薦路徑 | 理由 |
 |--------|----------|------|
-| 设计师 / 产品经理 | 基础篇 | 零代码基础也能做出可运行的原型 |
-| 文科生 / 跨专业 | 基础篇 | 从最基础的概念开始，循序渐进 |
-| 前端开发者 | 进阶篇 | 扩展后端能力，成为全栈工程师 |
-| 后端开发者 | 进阶篇 | 了解现代前端生态和 Next.js |
-| 创业者 / 独立开发者 | 两者皆可 | 快速搭建 MVP，独立完成产品 |
-| 想提升效率的开发者 | 基础篇 + 进阶篇 | 系统学习 AI 辅助开发工作流 |
+| 設計師 / 產品經理 | 基礎篇 | 零代碼基礎也能做出可運行的原型 |
+| 文科生 / 跨專業 | 基礎篇 | 從最基礎的概念開始，循序漸進 |
+| 前端開發者 | 進階篇 | 擴展後端能力，成爲全棧工程師 |
+| 後端開發者 | 進階篇 | 瞭解現代前端生態和 Next.js |
+| 創業者 / 獨立開發者 | 兩者皆可 | 快速搭建 MVP，獨立完成產品 |
+| 想提升效率的開發者 | 基礎篇 + 進階篇 | 系統學習 AI 輔助開發工作流 |
 
-## 技术栈一览
+## 技術棧一覽
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
 
 <div style="padding: 1.5rem; border-radius: 12px; background: linear-gradient(135deg, #667eea11 0%, #764ba211 100%); border: 1px solid #667eea33;">
-  <h4 style="margin-top: 0; margin-bottom: 1rem; color: #667eea;">基础篇</h4>
+  <h4 style="margin-top: 0; margin-bottom: 1rem; color: #667eea;">基礎篇</h4>
   <ul style="margin: 0; padding-left: 1.5rem;">
-    <li><strong>前端基础</strong>：HTML/CSS/JS</li>
+    <li><strong>前端基礎</strong>：HTML/CSS/JS</li>
     <li><strong>AI 工具</strong>：ChatGPT/Claude/Cursor等</li>
-    <li><strong>版本控制</strong>：Git 基础操作</li>
-    <li><strong>部署</strong>：静态网站部署</li>
+    <li><strong>版本控制</strong>：Git 基礎操作</li>
+    <li><strong>部署</strong>：靜態網站部署</li>
   </ul>
 </div>
 
 <div style="padding: 1.5rem; border-radius: 12px; background: linear-gradient(135deg, #f093fb11 0%, #f5576c11 100%); border: 1px solid #f093fb33;">
-  <h4 style="margin-top: 0; margin-bottom: 1rem; color: #f093fb;">进阶篇</h4>
+  <h4 style="margin-top: 0; margin-bottom: 1rem; color: #f093fb;">進階篇</h4>
   <ul style="margin: 0; padding-left: 1.5rem;">
     <li><strong>框架</strong>：Next.js + TypeScript</li>
-    <li><strong>数据层</strong>：PostgreSQL + Prisma</li>
+    <li><strong>數據層</strong>：PostgreSQL + Prisma</li>
     <li><strong>UI 框架</strong>：Tailwind CSS + shadcn/ui</li>
-    <li><strong>认证</strong>：NextAuth.js</li>
+    <li><strong>認證</strong>：NextAuth.js</li>
     <li><strong>部署</strong>：Docker + Vercel/Edgeone</li>
   </ul>
 </div>
 
 </div>
 
-## 贡献者名单
+## 貢獻者名單
 
-感谢以下成员为本项目做出的贡献：
+感謝以下成員爲本項目做出的貢獻：
 
-| 姓名 | 职务 | 简介 |
+| 姓名 | 職務 | 簡介 |
 |------|------|------|
-| <a href="http://www.guohaoqi.cn" target="_blank">齐国皓</a> | 项目负责人 & 核心贡献者 | 现就读于新加坡国立大学计算机学院, 湖南大学金融科技协会创始人 |
-| <a href="https://www.hangkangfu.cn/" target="_blank">符航康</a> | 项目负责人 & 核心贡献者 | 湖南大学金融科技协会创始成员, 一名 AI 原生的年轻人，湖南大学信息科学与工程学院24级本科生 |
-| 陈俊希 | 「优质文章篇」板块贡献者 | 湖南大学金融科技协会现任会长，湖南大学金融与统计学院24级本科生 |
-| 金龙 | 「实践篇」板块贡献者 | 北京大学学生创新学社AI俱乐部副部长，北京大学24级研究生 |
-| 舒璐璐 | 「实践篇」板块贡献者 | 湖南大学「麓山人文+」创始人，湖南大学岳麓书院23级本科生 |
+| <a href="http://www.guohaoqi.cn" target="_blank">齊國皓</a> | 項目負責人 & 核心貢獻者 | 現就讀於新加坡國立大學計算機學院, 湖南大學金融科技協會創始人 |
+| <a href="https://www.hangkangfu.cn/" target="_blank">符航康</a> | 項目負責人 & 核心貢獻者 | 湖南大學金融科技協會創始成員, 一名 AI 原生的年輕人，湖南大學信息科學與工程學院24級本科生 |
+| 陳俊希 | 「優質文章篇」板塊貢獻者 | 湖南大學金融科技協會現任會長，湖南大學金融與統計學院24級本科生 |
+| 金龍 | 「實踐篇」板塊貢獻者 | 北京大學學生創新學社AI俱樂部副部長，北京大學24級研究生 |
+| 舒璐璐 | 「實踐篇」板塊貢獻者 | 湖南大學「麓山人文+」創始人，湖南大學嶽麓書院23級本科生 |
 
-## 如何贡献
+## 如何貢獻
 
-本项目欢迎社区贡献：
+本項目歡迎社區貢獻：
 
-- 在页面底部评论区反馈问题
+- 在頁面底部評論區反饋問題
 - 提交 [GitHub Issues](https://github.com/datawhalechina/vibe-vibe/issues)
-- 提交 Pull Request 完善内容
+- 提交 Pull Request 完善內容
 

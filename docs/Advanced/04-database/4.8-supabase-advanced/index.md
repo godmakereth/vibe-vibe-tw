@@ -1,73 +1,73 @@
 ---
-title: "4.8 拓展：Supabase 为何如此强大——存储与认证联动"
+title: "4.8 拓展：Supabase 爲何如此強大——存儲與認證聯動"
 typora-root-url: ../../public
 ---
 
-# 4.8 拓展：Supabase 为何如此强大——存储与认证联动
+# 4.8 拓展：Supabase 爲何如此強大——存儲與認證聯動
 
-### 认知重构
+### 認知重構
 
-Supabase 不只是"开源 Firebase"——它是基于 PostgreSQL 的全栈后端平台，将数据库、认证、存储、实时订阅完美整合。
+Supabase 不只是"開源 Firebase"——它是基於 PostgreSQL 的全棧後端平臺，將數據庫、認證、存儲、即時訂閱完美整合。
 
-### Supabase 生态全景
+### Supabase 生態全景
 
 ```mermaid
 graph TD
-    A["Supabase"] --> B["PostgreSQL 数据库"]
-    A --> C["Auth 认证"]
-    A --> D["Storage 存储"]
-    A --> E["Realtime 实时"]
+    A["Supabase"] --> B["PostgreSQL 數據庫"]
+    A --> C["Auth 認證"]
+    A --> D["Storage 存儲"]
+    A --> E["Realtime 即時"]
     A --> F["Edge Functions"]
     
-    B --> G["RLS 行级安全"]
+    B --> G["RLS 行級安全"]
     C --> G
     D --> G
 ```
 
-### 子章节导航
+### 子章節導航
 
-| 章节 | 主题 | 核心问题 |
+| 章節 | 主題 | 核心問題 |
 |------|------|----------|
-| 4.8.1 | Storage | 如何安全地存储和访问文件？ |
-| 4.8.2 | Realtime | 如何实时推送数据变更？ |
-| 4.8.3 | Edge Functions | 如何在边缘运行自定义逻辑？ |
+| 4.8.1 | Storage | 如何安全地存儲和訪問文件？ |
+| 4.8.2 | Realtime | 如何即時推送數據變更？ |
+| 4.8.3 | Edge Functions | 如何在邊緣運行自定義邏輯？ |
 
-### 为什么选择 Supabase？
+### 爲什麼選擇 Supabase？
 
-| 特性 | Supabase | 传统方案 |
+| 特性 | Supabase | 傳統方案 |
 |------|----------|----------|
-| 数据库 | PostgreSQL（企业级） | 各种选择 |
-| 认证 | 内置 + RLS 联动 | 需要自己实现 |
-| 文件存储 | 内置 + 权限控制 | 需要额外服务 |
-| 实时订阅 | 内置 WebSocket | 需要自己搭建 |
-| 定价 | 免费额度充足 | 成本难控制 |
+| 數據庫 | PostgreSQL（企業級） | 各種選擇 |
+| 認證 | 內置 + RLS 聯動 | 需要自己實現 |
+| 文件存儲 | 內置 + 權限控制 | 需要額外服務 |
+| 即時訂閱 | 內置 WebSocket | 需要自己搭建 |
+| 定價 | 免費額度充足 | 成本難控制 |
 
-### 核心优势：RLS 统一权限
+### 核心優勢：RLS 統一權限
 
-Supabase 的杀手锏是 **Row Level Security**（行级安全策略），让数据库、存储、实时订阅共享同一套权限规则：
+Supabase 的殺手鐧是 **Row Level Security**（行級安全策略），讓數據庫、存儲、即時訂閱共享同一套權限規則：
 
 ```sql
--- 创建策略：用户只能访问自己的数据
+-- 創建策略：用戶只能訪問自己的數據
 CREATE POLICY "Users can view own data"
 ON users
 FOR SELECT
 USING (auth.uid() = id);
 
--- 同样的策略自动应用于：
--- - 数据库查询
--- - 文件存储访问
--- - 实时订阅过滤
+-- 同樣的策略自動應用於：
+-- - 數據庫查詢
+-- - 文件存儲訪問
+-- - 即時訂閱過濾
 ```
 
 ### 快速上手
 
-**安装 SDK**：
+**安裝 SDK**：
 
 ```bash
 npm install @supabase/supabase-js
 ```
 
-**初始化客户端**：
+**初始化客戶端**：
 
 ```typescript
 // lib/supabase.ts
@@ -79,23 +79,23 @@ export const supabase = createClient(
 )
 ```
 
-### 与 Prisma 的关系
+### 與 Prisma 的關係
 
 ```mermaid
 graph LR
-    A["Next.js 应用"] --> B["Prisma ORM"]
+    A["Next.js 應用"] --> B["Prisma ORM"]
     A --> C["Supabase Client"]
     B --> D["Supabase PostgreSQL"]
     C --> D
     C --> E["Storage/Realtime"]
 ```
 
-- **Prisma**：用于复杂的数据库操作
-- **Supabase Client**：用于存储、实时订阅、认证等特性
+- **Prisma**：用於複雜的數據庫操作
+- **Supabase Client**：用於存儲、即時訂閱、認證等特性
 
-### 本章小结
+### 本章小結
 
-- Supabase 提供一站式后端解决方案
-- RLS 是统一权限控制的核心
-- 可以与 Prisma 配合使用
-- 适合快速构建全栈应用
+- Supabase 提供一站式後端解決方案
+- RLS 是統一權限控制的核心
+- 可以與 Prisma 配合使用
+- 適合快速構建全棧應用

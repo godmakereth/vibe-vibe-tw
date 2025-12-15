@@ -1,19 +1,19 @@
 ---
-title: "1.5 全副武装你的开发环境——工具链与环境：IDE/Git/Node.js/数据库/部署平台"
+title: "1.5 全副武裝你的開發環境——工具鏈與環境：IDE/Git/Node.js/數據庫/部署平臺"
 typora-root-url: ../../public
 ---
 
-# 1.5 全副武装你的开发环境——工具链与环境：IDE/Git/Node.js/数据库/部署平台
+# 1.5 全副武裝你的開發環境——工具鏈與環境：IDE/Git/Node.js/數據庫/部署平臺
 
-### 一句话破题
+### 一句話破題
 
-开发环境是你的"工作台"——工具选对了、配置好了，开发效率能提升数倍。
+開發環境是你的"工作臺"——工具選對了、配置好了，開發效率能提升數倍。
 
-### 工具链全景图
+### 工具鏈全景圖
 
 ```mermaid
 graph TB
-    subgraph IDE["代码编辑"]
+    subgraph IDE["代碼編輯"]
         I1["VS Code / Cursor"]
     end
     
@@ -21,74 +21,74 @@ graph TB
         V1["Git + GitHub"]
     end
     
-    subgraph Runtime["运行环境"]
+    subgraph Runtime["運行環境"]
         R1["Node.js + pnpm"]
     end
     
-    subgraph DB["数据存储"]
+    subgraph DB["數據存儲"]
         D1["PostgreSQL / SQLite"]
     end
     
-    subgraph Deploy["部署平台"]
+    subgraph Deploy["部署平臺"]
         P1["Vercel / EdgeOne / 1Panel"]
     end
     
     IDE --> Version --> Runtime --> DB --> Deploy
 ```
 
-### 本节覆盖内容
+### 本節覆蓋內容
 
-| 章节 | 主题 | 核心内容 |
+| 章節 | 主題 | 核心內容 |
 |------|------|----------|
-| 1.5.1 | IDE 配置 | VS Code 插件推荐与配置 |
-| 1.5.2 | Git 工作流 | 分支策略与协作规范 |
-| 1.5.3 | 数据库选择 | PostgreSQL vs MySQL vs SQLite |
-| 1.5.4 | 部署平台 | 容器化与云服务选择 |
-| 1.5.5 | Vercel | Next.js 最佳部署平台 |
-| 1.5.6 | 腾讯云 EO | 国内访问优化方案 |
+| 1.5.1 | IDE 配置 | VS Code 插件推薦與配置 |
+| 1.5.2 | Git 工作流 | 分支策略與協作規範 |
+| 1.5.3 | 數據庫選擇 | PostgreSQL vs MySQL vs SQLite |
+| 1.5.4 | 部署平臺 | 容器化與雲服務選擇 |
+| 1.5.5 | Vercel | Next.js 最佳部署平臺 |
+| 1.5.6 | 騰訊雲 EO | 國內訪問優化方案 |
 
-### 推荐技术栈
+### 推薦技術棧
 
-本课程统一使用以下技术栈，确保学习过程中的一致性：
+本課程統一使用以下技術棧，確保學習過程中的一致性：
 
-| 类别 | 推荐工具 | 备选方案 |
+| 類別 | 推薦工具 | 備選方案 |
 |------|----------|----------|
-| **编辑器** | Cursor | VS Code |
+| **編輯器** | Cursor | VS Code |
 | **版本控制** | Git + GitHub | GitLab |
-| **运行时** | Node.js 20 LTS | Node.js 18 LTS |
+| **運行時** | Node.js 20 LTS | Node.js 18 LTS |
 | **包管理器** | pnpm | npm / yarn |
-| **数据库** | PostgreSQL | SQLite（开发环境） |
+| **數據庫** | PostgreSQL | SQLite（開發環境） |
 | **ORM** | Prisma | - |
 | **部署** | Vercel | EdgeOne / 1Panel |
 
-### 为什么选择这些工具？
+### 爲什麼選擇這些工具？
 
-1. **Cursor**：AI 原生 IDE，与课程的 Vibe Coding 理念高度契合
-2. **pnpm**：更快的安装速度，更节省磁盘空间
-3. **PostgreSQL**：功能强大，与 Prisma 配合良好
-4. **Vercel**：与 Next.js 深度集成，零配置部署
+1. **Cursor**：AI 原生 IDE，與課程的 Vibe Coding 理念高度契合
+2. **pnpm**：更快的安裝速度，更節省磁盤空間
+3. **PostgreSQL**：功能強大，與 Prisma 配合良好
+4. **Vercel**：與 Next.js 深度集成，零配置部署
 
-### 环境检查清单
+### 環境檢查清單
 
-在开始后续学习之前，确认你的环境满足：
+在開始後續學習之前，確認你的環境滿足：
 
 ```bash
-# 检查 Node.js 版本
-node -v  # 应该 >= 18.17
+# 檢查 Node.js 版本
+node -v  # 應該 >= 18.17
 
-# 检查 pnpm
-pnpm -v  # 应该已安装
+# 檢查 pnpm
+pnpm -v  # 應該已安裝
 
-# 检查 Git
-git --version  # 应该已安装
+# 檢查 Git
+git --version  # 應該已安裝
 
-# 检查编辑器
-# Cursor 或 VS Code 已安装并配置好 AI 助手
+# 檢查編輯器
+# Cursor 或 VS Code 已安裝並配置好 AI 助手
 ```
 
-### 接下来的学习路径
+### 接下來的學習路徑
 
-如果你是完全新手，建议按顺序学习每个子章节。如果你已经有开发经验，可以跳过熟悉的部分，重点关注：
+如果你是完全新手，建議按順序學習每個子章節。如果你已經有開發經驗，可以跳過熟悉的部分，重點關注：
 
-- **1.5.2 Git 工作流**：团队协作的基础
-- **1.5.5 Vercel**：快速部署你的 Next.js 应用
+- **1.5.2 Git 工作流**：團隊協作的基礎
+- **1.5.5 Vercel**：快速部署你的 Next.js 應用

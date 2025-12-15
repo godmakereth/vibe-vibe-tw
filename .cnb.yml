@@ -8,7 +8,7 @@ $:
       services:
         - vscode
         - docker
-      # 开发环境启动后会执行的任务
+      # 開發環境啓動後會執行的任務
       imports:
         - https://cnb.cool/eyre921/secret/-/blob/main/edgeone-pages-env.yml
         - https://cnb.cool/eyre921/secret/-/blob/main/dk.yml

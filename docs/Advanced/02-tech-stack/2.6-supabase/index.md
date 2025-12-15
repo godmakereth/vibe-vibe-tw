@@ -1,76 +1,76 @@
 ---
-title: "2.6 全家桶服务好不好用——拓展：Supabase适用与取舍"
+title: "2.6 全家桶服務好不好用——拓展：Supabase適用與取捨"
 typora-root-url: ../../public
 ---
 
-# 2.6 全家桶服务好不好用——Supabase 适用与取舍
+# 2.6 全家桶服務好不好用——Supabase 適用與取捨
 
-## 认知重构
+## 認知重構
 
-Supabase 自称"开源的 Firebase 替代品"，提供了数据库、认证、存储、实时订阅等一体化服务。它能让你快速搭建后端，但"全家桶"也意味着一定程度的绑定。
+Supabase 自稱"開源的 Firebase 替代品"，提供了數據庫、認證、存儲、即時訂閱等一體化服務。它能讓你快速搭建後端，但"全家桶"也意味着一定程度的綁定。
 
 ```
-传统方式：PostgreSQL + NextAuth + S3 + 自建实时服务
-Supabase：一个平台全搞定（但有迁移成本）
+傳統方式：PostgreSQL + NextAuth + S3 + 自建即時服務
+Supabase：一個平臺全搞定（但有遷移成本）
 ```
 
-## Supabase 服务全景
+## Supabase 服務全景
 
 ```mermaid
 flowchart TB
-    subgraph Supabase["Supabase 平台"]
+    subgraph Supabase["Supabase 平臺"]
         DB["Database<br/>PostgreSQL"]
-        Auth["Auth<br/>用户认证"]
-        Storage["Storage<br/>文件存储"]
-        Realtime["Realtime<br/>实时订阅"]
-        Edge["Edge Functions<br/>边缘计算"]
+        Auth["Auth<br/>用戶認證"]
+        Storage["Storage<br/>文件存儲"]
+        Realtime["Realtime<br/>即時訂閱"]
+        Edge["Edge Functions<br/>邊緣計算"]
     end
     
-    App["Next.js 应用"] --> DB
+    App["Next.js 應用"] --> DB
     App --> Auth
     App --> Storage
     App --> Realtime
     App --> Edge
 ```
 
-| 服务 | 功能 | 对标 |
+| 服務 | 功能 | 對標 |
 |------|------|------|
-| **Database** | PostgreSQL 数据库 | 自建 PostgreSQL |
-| **Auth** | 用户认证、OAuth | NextAuth.js |
-| **Storage** | 文件存储 | 阿里云 OSS / S3 |
-| **Realtime** | 数据变更订阅 | Socket.io |
-| **Edge Functions** | 边缘函数 | Cloudflare Workers |
+| **Database** | PostgreSQL 數據庫 | 自建 PostgreSQL |
+| **Auth** | 用戶認證、OAuth | NextAuth.js |
+| **Storage** | 文件存儲 | 阿里雲 OSS / S3 |
+| **Realtime** | 數據變更訂閱 | Socket.io |
+| **Edge Functions** | 邊緣函數 | Cloudflare Workers |
 
-## 何时该用 Supabase？
+## 何時該用 Supabase？
 
 ```mermaid
 flowchart TD
-    Start["是否使用 Supabase?"] --> Q1{"项目阶段?"}
-    Q1 -->|"原型/MVP"| Yes1["✅ 强烈推荐"]
-    Q1 -->|"生产环境"| Q2{"团队规模?"}
-    Q2 -->|"1-3人"| Yes2["✅ 可以考虑"]
-    Q2 -->|"较大团队"| Q3{"是否接受供应商锁定?"}
+    Start["是否使用 Supabase?"] --> Q1{"項目階段?"}
+    Q1 -->|"原型/MVP"| Yes1["✅ 強烈推薦"]
+    Q1 -->|"生產環境"| Q2{"團隊規模?"}
+    Q2 -->|"1-3人"| Yes2["✅ 可以考慮"]
+    Q2 -->|"較大團隊"| Q3{"是否接受供應商鎖定?"}
     Q3 -->|"接受"| Yes3["✅ 可以使用"]
-    Q3 -->|"不接受"| No["❌ 建议自建"]
+    Q3 -->|"不接受"| No["❌ 建議自建"]
 ```
 
-### ✅ 适合使用 Supabase
+### ✅ 適合使用 Supabase
 
-- **快速原型**：几分钟搭建后端
-- **黑客松项目**：时间紧迫，一站式解决
-- **小团队**：不想运维数据库
-- **实时功能**：聊天、协作等场景
+- **快速原型**：幾分鐘搭建後端
+- **黑客松項目**：時間緊迫，一站式解決
+- **小團隊**：不想運維數據庫
+- **即時功能**：聊天、協作等場景
 
-### ❌ 不太适合
+### ❌ 不太適合
 
-- **高度定制化需求**：复杂业务逻辑
-- **严格合规要求**：数据必须自主可控
-- **已有成熟基础设施**：迁移成本高
-- **预算敏感**：用量大时成本可能更高
+- **高度定製化需求**：複雜業務邏輯
+- **嚴格合規要求**：數據必須自主可控
+- **已有成熟基礎設施**：遷移成本高
+- **預算敏感**：用量大時成本可能更高
 
-## 本章导航
+## 本章導航
 
-- **2.6.1 Supabase 服务概览**：数据库/存储/认证一体化
-- **2.6.2 适用场景**：快速原型 vs 生产环境
-- **2.6.3 成本考量**：免费额度与付费计划
-- **2.6.4 迁移策略**：从 Supabase 到自建服务
+- **2.6.1 Supabase 服務概覽**：數據庫/存儲/認證一體化
+- **2.6.2 適用場景**：快速原型 vs 生產環境
+- **2.6.3 成本考量**：免費額度與付費計劃
+- **2.6.4 遷移策略**：從 Supabase 到自建服務

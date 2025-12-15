@@ -1,9 +1,9 @@
 ---
-title: "AI Agent 开发"
+title: "AI Agent 開發"
 ---
 
-# AI Agent 开发
+# AI Agent 開發
 
-学习构建 AI Agent 系统，包括 RAG、向量数据库、MCP 集成等。
+學習構建 AI Agent 系統，包括 RAG、向量數據庫、MCP 集成等。
 
-教程开发中
+教程開發中

@@ -1,60 +1,60 @@
 ---
-title: "4.4 告别手写 SQL——Prisma 实战应用"
+title: "4.4 告別手寫 SQL——Prisma 實戰應用"
 typora-root-url: ../../public
 ---
 
-# 4.4 告别手写 SQL——Prisma 实战应用
+# 4.4 告別手寫 SQL——Prisma 實戰應用
 
-### 认知重构
+### 認知重構
 
-Prisma 是现代 TypeScript 项目的首选 ORM——它用类型安全的 API 取代了手写 SQL，让数据库操作变得简单、安全、可维护。
+Prisma 是現代 TypeScript 項目的首選 ORM——它用類型安全的 API 取代了手寫 SQL，讓數據庫操作變得簡單、安全、可維護。
 
-### 为什么选择 Prisma？
+### 爲什麼選擇 Prisma？
 
-| 特性 | Prisma | 传统 ORM | 原生 SQL |
+| 特性 | Prisma | 傳統 ORM | 原生 SQL |
 |------|--------|----------|----------|
-| **类型安全** | 完全类型安全 | 部分支持 | 无 |
-| **学习成本** | 低 | 中 | 高 |
-| **迁移管理** | 内置 | 需配置 | 手动 |
-| **查询性能** | 优秀 | 一般 | 最佳 |
-| **开发体验** | 极佳 | 一般 | 差 |
+| **類型安全** | 完全類型安全 | 部分支持 | 無 |
+| **學習成本** | 低 | 中 | 高 |
+| **遷移管理** | 內置 | 需配置 | 手動 |
+| **查詢性能** | 優秀 | 一般 | 最佳 |
+| **開發體驗** | 極佳 | 一般 | 差 |
 
 ### Prisma 工作流程
 
 ```mermaid
 graph LR
-    A["定义 Schema"] --> B["生成迁移"]
+    A["定義 Schema"] --> B["生成遷移"]
     B --> C["生成 Client"]
-    C --> D["类型安全查询"]
+    C --> D["類型安全查詢"]
     
     A1["schema.prisma"] --> A
     B1["migration.sql"] --> B
     C1["@prisma/client"] --> C
 ```
 
-### 子章节导航
+### 子章節導航
 
-| 章节 | 主题 | 核心问题 |
+| 章節 | 主題 | 核心問題 |
 |------|------|----------|
-| 4.4.1 | 安装配置 | 如何初始化 Prisma 项目？ |
-| 4.4.2 | Schema 结构 | schema.prisma 文件怎么写？ |
-| 4.4.3 | 模型定义 | 如何定义表和关系？ |
-| 4.4.4 | 数据库连接 | 如何配置数据库连接？ |
-| 4.4.5 | 迁移管理 | 如何管理数据库变更？ |
-| 4.4.6 | 种子数据 | 如何初始化测试数据？ |
-| 4.4.7 | 建模实践 | 真实项目如何设计模型？ |
-| 4.4.8 | 查询优化 | 如何优化 Prisma 查询？ |
-| 4.4.9 | 事务处理 | 如何保证数据一致性？ |
+| 4.4.1 | 安裝配置 | 如何初始化 Prisma 項目？ |
+| 4.4.2 | Schema 結構 | schema.prisma 文件怎麼寫？ |
+| 4.4.3 | 模型定義 | 如何定義表和關係？ |
+| 4.4.4 | 數據庫連接 | 如何配置數據庫連接？ |
+| 4.4.5 | 遷移管理 | 如何管理數據庫變更？ |
+| 4.4.6 | 種子數據 | 如何初始化測試數據？ |
+| 4.4.7 | 建模實踐 | 真實項目如何設計模型？ |
+| 4.4.8 | 查詢優化 | 如何優化 Prisma 查詢？ |
+| 4.4.9 | 事務處理 | 如何保證數據一致性？ |
 
 ### Prisma 核心概念
 
 ```mermaid
 graph TB
-    subgraph "Prisma 组件"
-        Schema["Prisma Schema<br/>定义数据模型"]
-        Migrate["Prisma Migrate<br/>管理数据库变更"]
-        Client["Prisma Client<br/>类型安全查询"]
-        Studio["Prisma Studio<br/>可视化管理"]
+    subgraph "Prisma 組件"
+        Schema["Prisma Schema<br/>定義數據模型"]
+        Migrate["Prisma Migrate<br/>管理數據庫變更"]
+        Client["Prisma Client<br/>類型安全查詢"]
+        Studio["Prisma Studio<br/>可視化管理"]
     end
     
     Schema --> Migrate
@@ -62,17 +62,17 @@ graph TB
     Client --> Studio
 ```
 
-### 快速体验
+### 快速體驗
 
 ```bash
-# 1. 安装
+# 1. 安裝
 npm install prisma @prisma/client
 
 # 2. 初始化
 npx prisma init
 
-# 3. 定义模型（schema.prisma）
-# 4. 生成迁移
+# 3. 定義模型（schema.prisma）
+# 4. 生成遷移
 npx prisma migrate dev --name init
 
 # 5. 使用
@@ -82,33 +82,33 @@ npx prisma migrate dev --name init
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-// 完全类型安全的查询
+// 完全類型安全的查詢
 const users = await prisma.user.findMany({
   where: { status: 'ACTIVE' },
   include: { posts: true }
 })
 ```
 
-### AI 协作指南
+### AI 協作指南
 
-**核心意图**：让 AI 帮你生成 Prisma Schema 或查询代码。
+**核心意圖**：讓 AI 幫你生成 Prisma Schema 或查詢代碼。
 
-**常用提问模板**：
+**常用提問模板**：
 ```
-帮我写一个 Prisma Schema：
-- 需求：[业务需求描述]
+幫我寫一個 Prisma Schema：
+- 需求：[業務需求描述]
 - 表：[需要的表]
-- 关系：[表之间的关系]
+- 關係：[表之間的關係]
 ```
 
 ```
-帮我写 Prisma 查询：
-- 模型：[相关模型]
-- 需求：[查询需求]
-- 条件：[过滤条件]
+幫我寫 Prisma 查詢：
+- 模型：[相關模型]
+- 需求：[查詢需求]
+- 條件：[過濾條件]
 ```
 
-### 学习路径建议
+### 學習路徑建議
 
 **新手**：4.4.1 → 4.4.2 → 4.4.3 → 4.4.5 → 4.4.6
-**进阶**：4.4.4 → 4.4.7 → 4.4.8 → 4.4.9
+**進階**：4.4.4 → 4.4.7 → 4.4.8 → 4.4.9

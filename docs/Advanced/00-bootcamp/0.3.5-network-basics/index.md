@@ -1,44 +1,44 @@
 ---
-title: "0.3.5 你的电脑如何上网——网络基础：HTTP/HTTPS/域名/端口/API 概念"
+title: "0.3.5 你的電腦如何上網——網絡基礎：HTTP/HTTPS/域名/端口/API 概念"
 typora-root-url: ../../public
 ---
 
-# 0.3.5 你的电脑如何上网——网络基础：HTTP/HTTPS/域名/端口/API 概念
+# 0.3.5 你的電腦如何上網——網絡基礎：HTTP/HTTPS/域名/端口/API 概念
 
-## 一句话破题
+## 一句話破題
 
-上网的全链路可以概括为：**域名解析到 IP → 通过端口建立连接 → 用 HTTP/HTTPS 交换数据 → 以 API 作为程序间的协作契约**。
+上網的全鏈路可以概括爲：**域名解析到 IP → 通過端口建立連接 → 用 HTTP/HTTPS 交換數據 → 以 API 作爲程序間的協作契約**。
 
-## 章节导览
+## 章節導覽
 
-- **HTTP 协议**：浏览器与服务器的“对话格式”，包含方法、头、体与状态码。
-- **HTTPS 与证书**：在 HTTP 外面套一层“加密与身份验证”的保护壳，保障隐私与完整性。
-- **DNS 域名解析**：把人类可读的域名翻译成机器可读的 IP 地址。
-- **端口与服务**：一台机器上的“门牌号”，不同服务监听不同端口。
-- **API 风格**：REST 与 GraphQL，定义程序间如何协作与传输数据。
+- **HTTP 協議**：瀏覽器與服務器的“對話格式”，包含方法、頭、體與狀態碼。
+- **HTTPS 與證書**：在 HTTP 外面套一層“加密與身份驗證”的保護殼，保障隱私與完整性。
+- **DNS 域名解析**：把人類可讀的域名翻譯成機器可讀的 IP 地址。
+- **端口與服務**：一臺機器上的“門牌號”，不同服務監聽不同端口。
+- **API 風格**：REST 與 GraphQL，定義程序間如何協作與傳輸數據。
 
-## 可视化总览
+## 可視化總覽
 
 ```mermaid
 flowchart LR
-    subgraph sgnet ["上网全链路"]
-        User["用户浏览器"] --> DNS["域名解析(DNS)"];
+    subgraph sgnet ["上網全鏈路"]
+        User["用戶瀏覽器"] --> DNS["域名解析(DNS)"];
         DNS --> IP["得到 IP 地址"];
-        IP --> Port["与端口建立连接(TCP/UDP)"];
-        Port --> Proto["协议传输(HTTP/HTTPS)"];
-        Proto --> API["API 契约(REST/GraphQL)"];
-        API --> App["应用数据(JSON/HTML)"];
+        IP --> Port["與端口建立連接(TCP/UDP)"];
+        Port --> Proto["協議傳輸(HTTP/HTTPS)"];
+        Proto --> API["API 契約(REST/GraphQL)"];
+        API --> App["應用數據(JSON/HTML)"];
     end
 ```
 
-## AI 协作指南
+## AI 協作指南
 
-- 核心意图：让 AI 帮你“定位网络故障点”或“设计合理的接口契约”。
-- 需求定义公式：
-  - “请帮我诊断访问 `example.com` 失败的原因，依次检查 DNS 解析、端口连通性与 HTTPS 证书。”
-  - “请为用户列表提供一个 REST API，返回分页数据，包含总数与当前页。”
-- 关键术语：`DNS`, `端口连通性`, `HTTP 方法/状态码`, `HTTPS 证书`, `REST`, `GraphQL`。
-- 在 Windows PowerShell 中的常用检查命令：
+- 核心意圖：讓 AI 幫你“定位網絡故障點”或“設計合理的接口契約”。
+- 需求定義公式：
+  - “請幫我診斷訪問 `example.com` 失敗的原因，依次檢查 DNS 解析、端口連通性與 HTTPS 證書。”
+  - “請爲用戶列表提供一個 REST API，返回分頁數據，包含總數與當前頁。”
+- 關鍵術語：`DNS`, `端口連通性`, `HTTP 方法/狀態碼`, `HTTPS 證書`, `REST`, `GraphQL`。
+- 在 Windows PowerShell 中的常用檢查命令：
   - `Resolve-DnsName example.com`
   - `Test-NetConnection -ComputerName example.com -Port 443`
   - `Invoke-WebRequest -Uri https://example.com -UseBasicParsing`
@@ -46,7 +46,7 @@ flowchart LR
 
 ## 避坑指南
 
-- 把业务错误一律返回 `200` 是反模式，应使用恰当的状态码（如 `400/401/403/404/500`）。
-- 生产环境必须启用 HTTPS，避免明文传输与中间人攻击；同时注意“混合内容”问题。
-- DNS 变更有传播延迟，TTL 过低会导致频繁查询，过高会导致更新滞后。
-- 端口冲突会导致服务启动失败，先查占用再启动：`Get-NetTCPConnection -LocalPort <端口>`。
+- 把業務錯誤一律返回 `200` 是反模式，應使用恰當的狀態碼（如 `400/401/403/404/500`）。
+- 生產環境必須啓用 HTTPS，避免明文傳輸與中間人攻擊；同時注意“混合內容”問題。
+- DNS 變更有傳播延遲，TTL 過低會導致頻繁查詢，過高會導致更新滯後。
+- 端口衝突會導致服務啓動失敗，先查佔用再啓動：`Get-NetTCPConnection -LocalPort <端口>`。

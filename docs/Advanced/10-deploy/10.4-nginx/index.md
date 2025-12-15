@@ -1,66 +1,66 @@
 ---
-title: "10.4 网站的交通指挥官——反向代理与负载均衡：Nginx 配置实战"
+title: "10.4 網站的交通指揮官——反向代理與負載均衡：Nginx 配置實戰"
 typora-root-url: ../../public
 ---
 
-# 10.4 网站的交通指挥官——反向代理与负载均衡：Nginx 配置实战
+# 10.4 網站的交通指揮官——反向代理與負載均衡：Nginx 配置實戰
 
-用户访问的是域名，Nginx 决定请求去哪。
+用戶訪問的是域名，Nginx 決定請求去哪。
 
-## 为什么需要 Nginx
+## 爲什麼需要 Nginx
 
-Nginx 在现代 Web 架构中扮演着"门卫"角色：
+Nginx 在現代 Web 架構中扮演着"門衛"角色：
 
 ```mermaid
 flowchart LR
-    A[用户] -->|HTTPS| B[Nginx]
+    A[用戶] -->|HTTPS| B[Nginx]
     B -->|HTTP| C[Next.js :3000]
     B -->|HTTP| D[NestJS :3001]
-    B -->|直接返回| E[静态资源]
+    B -->|直接返回| E[靜態資源]
 ```
 
 ## 核心功能
 
-| 功能 | 说明 |
+| 功能 | 說明 |
 |------|------|
-| 反向代理 | 将请求转发到后端服务 |
-| SSL 终止 | 处理 HTTPS 加密/解密 |
-| 负载均衡 | 将请求分发到多个实例 |
-| 静态文件 | 直接返回静态资源 |
-| 缓存 | 缓存响应，减少后端压力 |
-| 压缩 | Gzip 压缩响应内容 |
+| 反向代理 | 將請求轉發到後端服務 |
+| SSL 終止 | 處理 HTTPS 加密/解密 |
+| 負載均衡 | 將請求分發到多個實例 |
+| 靜態文件 | 直接返回靜態資源 |
+| 緩存 | 緩存響應，減少後端壓力 |
+| 壓縮 | Gzip 壓縮響應內容 |
 
 ## 1Panel 中的 Nginx
 
-1Panel 默认使用 **OpenResty**（Nginx 的增强版），通过 **网站** 功能管理：
+1Panel 默認使用 **OpenResty**（Nginx 的增強版），通過 **網站** 功能管理：
 
-| 操作 | 路径 |
+| 操作 | 路徑 |
 |------|------|
-| 创建网站 | 网站 → 网站 → 创建网站 |
-| 配置反向代理 | 网站 → 选择站点 → 反向代理 |
-| SSL 证书 | 网站 → 选择站点 → HTTPS |
-| 查看配置 | 网站 → 选择站点 → 配置文件 |
+| 創建網站 | 網站 → 網站 → 創建網站 |
+| 配置反向代理 | 網站 → 選擇站點 → 反向代理 |
+| SSL 證書 | 網站 → 選擇站點 → HTTPS |
+| 查看配置 | 網站 → 選擇站點 → 配置文件 |
 
-## 本节目录
+## 本節目錄
 
-- **10.4.1 请求该转发给谁** — 反向代理基础配置
-- **10.4.2 HTTPS 证书怎么配** — SSL 配置与自动续期
-- **10.4.3 用户太多了怎么办** — 负载均衡策略
-- **10.4.4 图片如何加速访问** — 静态资源与 CDN
+- **10.4.1 請求該轉發給誰** — 反向代理基礎配置
+- **10.4.2 HTTPS 證書怎麼配** — SSL 配置與自動續期
+- **10.4.3 用戶太多了怎麼辦** — 負載均衡策略
+- **10.4.4 圖片如何加速訪問** — 靜態資源與 CDN
 
-## 典型配置架构
+## 典型配置架構
 
 ```mermaid
 flowchart TB
-    subgraph 互联网
-        A[用户浏览器]
+    subgraph 互聯網
+        A[用戶瀏覽器]
     end
     
-    subgraph 服务器
+    subgraph 服務器
         B[Nginx :80/443]
         C[Next.js :3000]
         D[NestJS :3001]
-        E[静态文件目录]
+        E[靜態文件目錄]
     end
     
     A -->|www.example.com| B
@@ -73,32 +73,32 @@ flowchart TB
 ## 常用命令
 
 ```bash
-# 测试配置语法
+# 測試配置語法
 nginx -t
 
-# 重载配置（不中断服务）
+# 重載配置（不中斷服務）
 nginx -s reload
 
-# 查看 Nginx 状态
+# 查看 Nginx 狀態
 systemctl status nginx
 
-# 查看访问日志
+# 查看訪問日誌
 tail -f /var/log/nginx/access.log
 
-# 查看错误日志
+# 查看錯誤日誌
 tail -f /var/log/nginx/error.log
 ```
 
-## 配置文件结构
+## 配置文件結構
 
 ```nginx
 # /etc/nginx/nginx.conf 主配置
 http {
-    # 全局设置
-    include /etc/nginx/conf.d/*.conf;  # 包含站点配置
+    # 全局設置
+    include /etc/nginx/conf.d/*.conf;  # 包含站點配置
 }
 
-# /etc/nginx/conf.d/example.conf 站点配置
+# /etc/nginx/conf.d/example.conf 站點配置
 server {
     listen 80;
     server_name example.com;

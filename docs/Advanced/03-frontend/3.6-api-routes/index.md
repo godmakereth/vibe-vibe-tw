@@ -1,62 +1,62 @@
 ---
-title: "3.6 别把厨房建在客厅——API Route 与服务层分离：输入/输出、幂等、鉴权、错误与重试"
+title: "3.6 別把廚房建在客廳——API Route 與服務層分離：輸入/輸出、冪等、鑑權、錯誤與重試"
 typora-root-url: ../../public
 ---
 
-# 3.6 别把厨房建在客厅——API Route 与服务层分离
+# 3.6 別把廚房建在客廳——API Route 與服務層分離
 
-### 一句话破题
+### 一句話破題
 
-API Route 是你的应用与外界通信的门户，但业务逻辑应该在服务层，而非路由处理器中。
+API Route 是你的應用與外界通信的門戶，但業務邏輯應該在服務層，而非路由處理器中。
 
-### 本节定位
+### 本節定位
 
-在 Next.js App Router 中，你可以用 Route Handlers 创建后端 API。但如果不做好分层，很快就会变成"厨房和客厅连在一起"——逻辑混乱、难以维护。
+在 Next.js App Router 中，你可以用 Route Handlers 創建後端 API。但如果不做好分層，很快就會變成"廚房和客廳連在一起"——邏輯混亂、難以維護。
 
 ```mermaid
 graph LR
-    A["客户端请求"] --> B["API Route"]
-    B --> C["参数验证"]
-    C --> D["服务层"]
-    D --> E["数据层"]
-    E --> F["数据库"]
+    A["客戶端請求"] --> B["API Route"]
+    B --> C["參數驗證"]
+    C --> D["服務層"]
+    D --> E["數據層"]
+    E --> F["數據庫"]
     
     style B fill:#f9f,stroke:#333
     style D fill:#9f9,stroke:#333
 ```
 
-### 分层架构的核心原则
+### 分層架構的核心原則
 
-| 层级 | 职责 | 不该做的事 |
+| 層級 | 職責 | 不該做的事 |
 |------|------|------------|
-| **API Route** | 接收请求、验证参数、返回响应 | 业务逻辑、数据库操作 |
-| **Service 层** | 业务逻辑、规则校验 | HTTP 处理、数据库细节 |
-| **Data 层** | 数据库操作、ORM 调用 | 业务规则、HTTP 响应 |
+| **API Route** | 接收請求、驗證參數、返回響應 | 業務邏輯、數據庫操作 |
+| **Service 層** | 業務邏輯、規則校驗 | HTTP 處理、數據庫細節 |
+| **Data 層** | 數據庫操作、ORM 調用 | 業務規則、HTTP 響應 |
 
-### 为什么需要分层？
+### 爲什麼需要分層？
 
-**场景**：假设你要实现"创建文章"功能。
+**場景**：假設你要實現"創建文章"功能。
 
-**没有分层（所有逻辑塞在 Route Handler 里）**：
+**沒有分層（所有邏輯塞在 Route Handler 裏）**：
 
 ```tsx
-// 问题代码：一锅炖
+// 問題代碼：一鍋燉
 export async function POST(request: Request) {
   const body = await request.json()
   
-  // 验证逻辑
+  // 驗證邏輯
   if (!body.title || body.title.length < 3) {
-    return Response.json({ error: '标题太短' }, { status: 400 })
+    return Response.json({ error: '標題太短' }, { status: 400 })
   }
   
-  // 业务逻辑
+  // 業務邏輯
   const slug = body.title.toLowerCase().replace(/ /g, '-')
   const existingPost = await prisma.post.findUnique({ where: { slug } })
   if (existingPost) {
     return Response.json({ error: 'slug 已存在' }, { status: 409 })
   }
   
-  // 数据库操作
+  // 數據庫操作
   const post = await prisma.post.create({
     data: { title: body.title, slug, content: body.content }
   })
@@ -65,10 +65,10 @@ export async function POST(request: Request) {
 }
 ```
 
-**有分层（职责清晰）**：
+**有分層（職責清晰）**：
 
 ```tsx
-// app/api/posts/route.ts - API 层
+// app/api/posts/route.ts - API 層
 export async function POST(request: Request) {
   const body = await request.json()
   const result = createPostSchema.safeParse(body)
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
   }
 }
 
-// services/postService.ts - 服务层
+// services/postService.ts - 服務層
 export async function createPost(data: CreatePostInput) {
   const slug = generateSlug(data.title)
   const existing = await postRepository.findBySlug(slug)
@@ -94,35 +94,35 @@ export async function createPost(data: CreatePostInput) {
   return postRepository.create({ ...data, slug })
 }
 
-// repositories/postRepository.ts - 数据层
+// repositories/postRepository.ts - 數據層
 export async function create(data: PostData) {
   return prisma.post.create({ data })
 }
 ```
 
-### 本节导航
+### 本節導航
 
-| 小节 | 主题 | 核心内容 |
+| 小節 | 主題 | 核心內容 |
 |------|------|----------|
-| **3.6.1** | API Route 结构 | GET/POST/PUT/DELETE 处理 |
-| **3.6.2** | 请求验证 | Zod 参数校验、类型安全 |
-| **3.6.3** | 服务层设计 | 业务逻辑封装与复用 |
-| **3.6.4** | 错误处理 | 统一异常处理机制 |
+| **3.6.1** | API Route 結構 | GET/POST/PUT/DELETE 處理 |
+| **3.6.2** | 請求驗證 | Zod 參數校驗、類型安全 |
+| **3.6.3** | 服務層設計 | 業務邏輯封裝與複用 |
+| **3.6.4** | 錯誤處理 | 統一異常處理機制 |
 
-### AI 协作指南
+### AI 協作指南
 
-**核心意图**：让 AI 帮你设计分层清晰的 API。
+**核心意圖**：讓 AI 幫你設計分層清晰的 API。
 
-**需求定义公式**：
-- 功能描述：我需要一个 [资源] 的 CRUD API
-- 技术要求：使用 Next.js Route Handler + Zod + Prisma
-- 分层要求：API 层只做路由，业务逻辑放服务层
+**需求定義公式**：
+- 功能描述：我需要一個 [資源] 的 CRUD API
+- 技術要求：使用 Next.js Route Handler + Zod + Prisma
+- 分層要求：API 層只做路由，業務邏輯放服務層
 
-**关键术语**：`Route Handler`、`Service`、`Repository`、`Zod`、`错误处理`
+**關鍵術語**：`Route Handler`、`Service`、`Repository`、`Zod`、`錯誤處理`
 
-### 验收清单
+### 驗收清單
 
-- [ ] API Route 只处理请求和响应
-- [ ] 业务逻辑封装在 Service 层
-- [ ] 使用 Zod 进行参数验证
-- [ ] 有统一的错误处理机制
+- [ ] API Route 只處理請求和響應
+- [ ] 業務邏輯封裝在 Service 層
+- [ ] 使用 Zod 進行參數驗證
+- [ ] 有統一的錯誤處理機制

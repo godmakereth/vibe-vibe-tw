@@ -1,42 +1,42 @@
 ---
-title: "0.4 搭建你的编程工作室——开发环境配置：Node.js、包管理器与工具链"
+title: "0.4 搭建你的編程工作室——開發環境配置：Node.js、包管理器與工具鏈"
 typora-root-url: ../../public
 ---
 
-# 0.4 搭建你的编程工作室——开发环境配置：Node.js、包管理器与工具链
+# 0.4 搭建你的編程工作室——開發環境配置：Node.js、包管理器與工具鏈
 
-## 一句话破题
+## 一句話破題
 
-稳定的开发环境 = 合适的 Node 版本 + 高效的包管理器 + 严谨的 TypeScript 配置。先跑通最小闭环，再优化性能与团队协作。
+穩定的開發環境 = 合適的 Node 版本 + 高效的包管理器 + 嚴謹的 TypeScript 配置。先跑通最小閉環，再優化性能與團隊協作。
 
-## 章节导览
+## 章節導覽
 
-- 包管理器选择：性能/磁盘占用/一致性对比，`npm` vs `pnpm` vs `yarn`。
-- Node 版本管理：跨平台 `nvm`/`nvm-windows`，`.nvmrc` 项目级锁定与环境变量配置。
-- TypeScript 配置：`tsconfig.json` 严格模式与路径别名最佳实践。
+- 包管理器選擇：性能/磁盤佔用/一致性對比，`npm` vs `pnpm` vs `yarn`。
+- Node 版本管理：跨平臺 `nvm`/`nvm-windows`，`.nvmrc` 項目級鎖定與環境變量配置。
+- TypeScript 配置：`tsconfig.json` 嚴格模式與路徑別名最佳實踐。
 
-## 总览可视化
+## 總覽可視化
 
 ```mermaid
 flowchart LR
-    Dev[开发者机器] --> PM[包管理器];
+    Dev[開發者機器] --> PM[包管理器];
     Dev --> NVM[Node 版本管理];
     Dev --> TSC[TypeScript 配置];
-    PM --> Lock[锁定依赖/提升性能];
-    NVM --> Node[统一 Node 版本];
-    TSC --> Safety[类型安全/可维护];
+    PM --> Lock[鎖定依賴/提升性能];
+    NVM --> Node[統一 Node 版本];
+    TSC --> Safety[類型安全/可維護];
 ```
 
-## AI 协作指南
+## AI 協作指南
 
-- 核心意图：让 AI 帮你“搭环境”和“制定规范”，而不是零碎地安装依赖。
-- 需求定义公式：
-  - “在 Windows PowerShell 下，使用 `nvm-windows` 安装并切换到 Node LTS 版本，生成 `.nvmrc` 与 `tsconfig.json` 严格模式配置。”
-  - “对现有项目的包管理器进行迁移到 `pnpm`，并提供缓存与 registry 优化命令。”
-- 关键术语：`nvm-windows`, `.nvmrc`, `NODE_ENV`, `registry`, `tsconfig`, `strict`。
+- 核心意圖：讓 AI 幫你“搭環境”和“制定規範”，而不是零碎地安裝依賴。
+- 需求定義公式：
+  - “在 Windows PowerShell 下，使用 `nvm-windows` 安裝並切換到 Node LTS 版本，生成 `.nvmrc` 與 `tsconfig.json` 嚴格模式配置。”
+  - “對現有項目的包管理器進行遷移到 `pnpm`，並提供緩存與 registry 優化命令。”
+- 關鍵術語：`nvm-windows`, `.nvmrc`, `NODE_ENV`, `registry`, `tsconfig`, `strict`。
 
 ## 避坑指南
 
-- 全局 Node 与项目 Node 不一致导致构建失败；使用 `.nvmrc` 锁定版本并在 CI 中强制检查。
-- 包管理器混用会破坏锁文件；团队统一选择一个，并清理缓存与锁文件后再迁移。
-- TypeScript 未开启严格模式造成隐形错误；务必开启 `strict` 与 `noImplicitAny`。
+- 全局 Node 與項目 Node 不一致導致構建失敗；使用 `.nvmrc` 鎖定版本並在 CI 中強制檢查。
+- 包管理器混用會破壞鎖文件；團隊統一選擇一個，並清理緩存與鎖文件後再遷移。
+- TypeScript 未開啓嚴格模式造成隱形錯誤；務必開啓 `strict` 與 `noImplicitAny`。

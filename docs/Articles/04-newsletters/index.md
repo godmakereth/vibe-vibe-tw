@@ -1,9 +1,9 @@
 ---
-title: "优质 Newsletter"
+title: "優質 Newsletter"
 ---
 
-# 优质 Newsletter
+# 優質 Newsletter
 
-值得订阅的技术周刊和 Newsletter 推荐。
+值得訂閱的技術週刊和 Newsletter 推薦。
 
-教程开发中
+教程開發中

@@ -1,41 +1,41 @@
 ---
-title: "8.3 让你看懂改了什么——提交规范：Conventional Commits 与 Release Note"
+title: "8.3 讓你看懂改了什麼——提交規範：Conventional Commits 與 Release Note"
 typora-root-url: ../../public
 ---
 
-# 8.3 让你(和 AI)看懂改了什么——提交规范
+# 8.3 讓你(和 AI)看懂改了什麼——提交規範
 
-好的提交信息是给未来的自己和队友写的说明书——也是让 AI 理解代码变更的关键。
+好的提交信息是給未來的自己和隊友寫的說明書——也是讓 AI 理解代碼變更的關鍵。
 
-## 为什么提交规范很重要
+## 爲什麼提交規範很重要
 
 ```bash
-# 差的提交历史
+# 差的提交歷史
 git log --oneline
 a1b2c3d fix
 b2c3d4e update
 c3d4e5f fix bug
-d4e5f6g 改了点东西
+d4e5f6g 改了點東西
 e5f6g7h WIP
 
-# 好的提交历史
+# 好的提交歷史
 git log --oneline
-a1b2c3d feat: 添加用户登录功能
-b2c3d4e fix: 修复登录验证失败的问题
-c3d4e5f docs: 更新 API 文档
-d4e5f6g refactor: 重构用户认证模块
-e5f6g7h test: 添加登录功能的单元测试
+a1b2c3d feat: 添加用戶登錄功能
+b2c3d4e fix: 修復登錄驗證失敗的問題
+c3d4e5f docs: 更新 API 文檔
+d4e5f6g refactor: 重構用戶認證模塊
+e5f6g7h test: 添加登錄功能的單元測試
 ```
 
-**规范提交的价值**：
-- 快速定位问题引入的提交
-- 自动生成 CHANGELOG
-- 方便代码审查
-- 让 AI 更容易理解代码变更意图
+**規範提交的價值**：
+- 快速定位問題引入的提交
+- 自動生成 CHANGELOG
+- 方便代碼審查
+- 讓 AI 更容易理解代碼變更意圖
 
-## Conventional Commits 规范
+## Conventional Commits 規範
 
-Conventional Commits 是目前最流行的提交信息规范：
+Conventional Commits 是目前最流行的提交信息規範：
 
 ```
 <type>(<scope>): <description>
@@ -47,43 +47,43 @@ Conventional Commits 是目前最流行的提交信息规范：
 
 ### 核心元素
 
-| 元素 | 说明 | 示例 |
+| 元素 | 說明 | 示例 |
 |------|------|------|
-| type | 变更类型 | feat, fix, docs |
-| scope | 影响范围（可选） | auth, api, ui |
-| description | 简短描述 | 添加用户登录 |
-| body | 详细说明（可选） | 多行详细描述 |
-| footer | 关联信息（可选） | Closes #123 |
+| type | 變更類型 | feat, fix, docs |
+| scope | 影響範圍（可選） | auth, api, ui |
+| description | 簡短描述 | 添加用戶登錄 |
+| body | 詳細說明（可選） | 多行詳細描述 |
+| footer | 關聯信息（可選） | Closes #123 |
 
-## 本节结构
+## 本節結構
 
-1. **提交格式**：Conventional Commits 标准格式详解
-2. **类型分类**：feat/fix/docs 等类型的使用场景
-3. **自动化检查**：commitlint 与 husky 配置
-4. **CHANGELOG 生成**：从提交历史自动生成发布日志
+1. **提交格式**：Conventional Commits 標準格式詳解
+2. **類型分類**：feat/fix/docs 等類型的使用場景
+3. **自動化檢查**：commitlint 與 husky 配置
+4. **CHANGELOG 生成**：從提交歷史自動生成發佈日誌
 
 ## 快速示例
 
 ```bash
 # 功能提交
-git commit -m "feat(auth): 添加 Google OAuth 登录"
+git commit -m "feat(auth): 添加 Google OAuth 登錄"
 
-# 修复提交
-git commit -m "fix(api): 修复用户查询分页错误"
+# 修復提交
+git commit -m "fix(api): 修復用戶查詢分頁錯誤"
 
-# 带 body 的提交
-git commit -m "refactor(database): 优化查询性能
+# 帶 body 的提交
+git commit -m "refactor(database): 優化查詢性能
 
-- 添加复合索引
-- 使用连接池
-- 缓存热点数据
+- 添加複合索引
+- 使用連接池
+- 緩存熱點數據
 
 Closes #456"
 ```
 
-## 验收清单
+## 驗收清單
 
-- [ ] 理解 Conventional Commits 规范
-- [ ] 能正确使用 type 和 scope
-- [ ] 会配置 commitlint 自动检查
-- [ ] 能使用工具自动生成 CHANGELOG
+- [ ] 理解 Conventional Commits 規範
+- [ ] 能正確使用 type 和 scope
+- [ ] 會配置 commitlint 自動檢查
+- [ ] 能使用工具自動生成 CHANGELOG

@@ -1,45 +1,45 @@
 ---
-title: "2.5 代码为什么会越写越乱——架构分层详解：页面/路由、API/HTTP、服务层/业务、数据层/Prisma+SQL"
+title: "2.5 代碼爲什麼會越寫越亂——架構分層詳解：頁面/路由、API/HTTP、服務層/業務、數據層/Prisma+SQL"
 typora-root-url: ../../public
 ---
 
-# 2.5 代码为什么会越写越乱——架构分层
+# 2.5 代碼爲什麼會越寫越亂——架構分層
 
-## 认知重构
+## 認知重構
 
-代码越写越乱的根本原因是：**职责混杂**。页面组件里写数据库查询，API 路由里写业务逻辑，到处都是重复代码。分层架构的目的就是**让每一层只做一件事**。
+代碼越寫越亂的根本原因是：**職責混雜**。頁面組件裏寫數據庫查詢，API 路由裏寫業務邏輯，到處都是重複代碼。分層架構的目的就是**讓每一層只做一件事**。
 
 ```
-乱的代码：page.tsx 里既有 UI、又有业务逻辑、还有数据库操作
-好的代码：page.tsx 只管 UI，逻辑交给 service，数据交给 repository
+亂的代碼：page.tsx 裏既有 UI、又有業務邏輯、還有數據庫操作
+好的代碼：page.tsx 只管 UI，邏輯交給 service，數據交給 repository
 ```
 
-## 分层架构全景
+## 分層架構全景
 
 ```mermaid
 flowchart TB
-    subgraph Presentation["表现层 Presentation"]
+    subgraph Presentation["表現層 Presentation"]
         Page["page.tsx"]
         Layout["layout.tsx"]
         Component["components/*"]
     end
     
-    subgraph Interface["接口层 Interface"]
+    subgraph Interface["接口層 Interface"]
         API["API Routes"]
         SA["Server Actions"]
     end
     
-    subgraph Service["业务层 Service"]
+    subgraph Service["業務層 Service"]
         UserService["user.service.ts"]
         PostService["post.service.ts"]
     end
     
-    subgraph Data["数据层 Data"]
+    subgraph Data["數據層 Data"]
         Prisma["Prisma Client"]
         Repository["repositories/*"]
     end
     
-    subgraph DB["数据库"]
+    subgraph DB["數據庫"]
         PostgreSQL["PostgreSQL"]
     end
     
@@ -52,60 +52,60 @@ flowchart TB
     Prisma --> PostgreSQL
 ```
 
-## 各层职责速览
+## 各層職責速覽
 
-| 层级 | 职责 | 关键文件 |
+| 層級 | 職責 | 關鍵文件 |
 |------|------|----------|
-| **表现层** | UI 渲染、用户交互 | `page.tsx`, `components/*` |
-| **接口层** | 请求处理、参数校验 | `route.ts`, `actions.ts` |
-| **业务层** | 核心逻辑、业务规则 | `*.service.ts` |
-| **数据层** | 数据访问、ORM 操作 | `*.repository.ts`, Prisma |
+| **表現層** | UI 渲染、用戶交互 | `page.tsx`, `components/*` |
+| **接口層** | 請求處理、參數校驗 | `route.ts`, `actions.ts` |
+| **業務層** | 核心邏輯、業務規則 | `*.service.ts` |
+| **數據層** | 數據訪問、ORM 操作 | `*.repository.ts`, Prisma |
 
-## 为什么要分层？
+## 爲什麼要分層？
 
-### 不分层的代码
+### 不分層的代碼
 
 ```typescript
-// app/posts/page.tsx - 一个文件干所有事
+// app/posts/page.tsx - 一個文件幹所有事
 export default async function PostsPage() {
-  // UI 关心的
+  // UI 關心的
   const session = await getServerSession()
   
-  // 业务逻辑
+  // 業務邏輯
   if (!session) {
     redirect('/login')
   }
   
-  // 数据访问
+  // 數據訪問
   const posts = await prisma.post.findMany({
     where: { authorId: session.user.id },
     orderBy: { createdAt: 'desc' },
     include: { author: true, tags: true },
   })
   
-  // 更多业务逻辑
+  // 更多業務邏輯
   const publishedPosts = posts.filter(p => p.status === 'published')
   const draftPosts = posts.filter(p => p.status === 'draft')
   
   return (
     <div>
       <h1>我的文章</h1>
-      {/* 很长的 JSX */}
+      {/* 很長的 JSX */}
     </div>
   )
 }
 ```
 
-**问题**：
-- 换数据库要改页面文件
-- 业务逻辑无法复用
-- 难以测试
-- AI 生成的代码到处都是
+**問題**：
+- 換數據庫要改頁面文件
+- 業務邏輯無法複用
+- 難以測試
+- AI 生成的代碼到處都是
 
-### 分层后的代码
+### 分層後的代碼
 
 ```typescript
-// app/posts/page.tsx - 只关心 UI
+// app/posts/page.tsx - 只關心 UI
 export default async function PostsPage() {
   const { publishedPosts, draftPosts } = await postService.getMyPosts()
   
@@ -116,7 +116,7 @@ export default async function PostsPage() {
   )
 }
 
-// services/post.service.ts - 只关心业务逻辑
+// services/post.service.ts - 只關心業務邏輯
 export const postService = {
   async getMyPosts() {
     const session = await authService.requireAuth()
@@ -129,7 +129,7 @@ export const postService = {
   }
 }
 
-// repositories/post.repository.ts - 只关心数据访问
+// repositories/post.repository.ts - 只關心數據訪問
 export const postRepository = {
   async findByAuthor(authorId: string) {
     return prisma.post.findMany({
@@ -141,48 +141,48 @@ export const postRepository = {
 }
 ```
 
-**好处**：
-- 每层职责单一，易于理解
-- 业务逻辑可复用
-- 易于测试（Mock 数据层即可）
-- AI 生成的代码有固定的放置位置
+**好處**：
+- 每層職責單一，易於理解
+- 業務邏輯可複用
+- 易於測試（Mock 數據層即可）
+- AI 生成的代碼有固定的放置位置
 
-## 目录结构建议
+## 目錄結構建議
 
 ```
 src/
-├── app/                    # 表现层 + 接口层
-│   ├── (marketing)/        # 营销页面
-│   ├── (dashboard)/        # 后台页面
+├── app/                    # 表現層 + 接口層
+│   ├── (marketing)/        # 營銷頁面
+│   ├── (dashboard)/        # 後臺頁面
 │   ├── api/                # API Routes
-│   └── actions/            # Server Actions（可选单独放）
+│   └── actions/            # Server Actions（可選單獨放）
 │
-├── components/             # UI 组件
-│   ├── ui/                 # 基础 UI 组件
-│   └── features/           # 业务组件
+├── components/             # UI 組件
+│   ├── ui/                 # 基礎 UI 組件
+│   └── features/           # 業務組件
 │
-├── services/               # 业务层
+├── services/               # 業務層
 │   ├── auth.service.ts
 │   ├── user.service.ts
 │   └── post.service.ts
 │
-├── repositories/           # 数据层
+├── repositories/           # 數據層
 │   ├── user.repository.ts
 │   └── post.repository.ts
 │
-├── lib/                    # 工具函数
+├── lib/                    # 工具函數
 │   ├── prisma.ts
 │   └── utils.ts
 │
-└── types/                  # 类型定义
+└── types/                  # 類型定義
     ├── user.ts
     └── post.ts
 ```
 
-## 本章导航
+## 本章導航
 
-- **2.5.1 表现层**：页面组件与路由管理
-- **2.5.2 接口层**：API 路由与 HTTP 处理
-- **2.5.3 业务层**：核心逻辑与规则封装
-- **2.5.4 数据层**：ORM 与数据库交互
-- **2.5.5 层间通信**：依赖注入与接口抽象
+- **2.5.1 表現層**：頁面組件與路由管理
+- **2.5.2 接口層**：API 路由與 HTTP 處理
+- **2.5.3 業務層**：核心邏輯與規則封裝
+- **2.5.4 數據層**：ORM 與數據庫交互
+- **2.5.5 層間通信**：依賴注入與接口抽象

@@ -1,9 +1,9 @@
 ---
-title: "开发者社区"
+title: "開發者社區"
 ---
 
-# 开发者社区
+# 開發者社區
 
-Discord 服务器、Twitter 推荐关注、GitHub 优质开源项目。
+Discord 服務器、Twitter 推薦關注、GitHub 優質開源項目。
 
-教程开发中
+教程開發中

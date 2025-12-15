@@ -1,41 +1,41 @@
 ---
-title: "6.3 守好程序的大门——API 安全防护实践"
+title: "6.3 守好程序的大門——API 安全防護實踐"
 typora-root-url: ../../public
 ---
 
-# 6.3 守好程序的大门——API 安全防护实践
+# 6.3 守好程序的大門——API 安全防護實踐
 
-## 认知重构
+## 認知重構
 
-API 是你应用与外界交互的窗口。每一个暴露的接口，都是潜在的攻击入口。API 安全不是"加个验证"那么简单，而是需要从认证、授权、输入验证、限流、日志等多个维度构建防护体系。
+API 是你應用與外界交互的窗口。每一個暴露的接口，都是潛在的攻擊入口。API 安全不是"加個驗證"那麼簡單，而是需要從認證、授權、輸入驗證、限流、日誌等多個維度構建防護體系。
 
 ```mermaid
 flowchart TD
-    Request["外部请求"] --> WAF["防火墙/WAF"]
+    Request["外部請求"] --> WAF["防火牆/WAF"]
     WAF --> RateLimit["限流"]
-    RateLimit --> Auth["认证"]
-    Auth --> AuthZ["授权"]
-    AuthZ --> Validation["输入验证"]
-    Validation --> Business["业务逻辑"]
-    Business --> Response["响应"]
+    RateLimit --> Auth["認證"]
+    Auth --> AuthZ["授權"]
+    AuthZ --> Validation["輸入驗證"]
+    Validation --> Business["業務邏輯"]
+    Business --> Response["響應"]
 ```
 
-## 本节内容
+## 本節內容
 
-| 小节 | 核心问题 | 你将学会 |
+| 小節 | 核心問題 | 你將學會 |
 |------|----------|----------|
-| 6.3.1 认证方法 | 如何验证请求者身份？ | JWT/Session/API Key 的选择 |
-| 6.3.2 CORS 机制 | 为什么会有跨域问题？ | 预检请求与安全配置 |
-| 6.3.3 XSS 防护 | 如何防止脚本注入？ | 输出编码与 CSP |
-| 6.3.4 CSRF 防护 | 如何防止伪造请求？ | Token 验证与 SameSite |
-| 6.3.5 API 限流 | 如何防止接口被滥用？ | 速率限制与异常检测 |
+| 6.3.1 認證方法 | 如何驗證請求者身份？ | JWT/Session/API Key 的選擇 |
+| 6.3.2 CORS 機制 | 爲什麼會有跨域問題？ | 預檢請求與安全配置 |
+| 6.3.3 XSS 防護 | 如何防止腳本注入？ | 輸出編碼與 CSP |
+| 6.3.4 CSRF 防護 | 如何防止僞造請求？ | Token 驗證與 SameSite |
+| 6.3.5 API 限流 | 如何防止接口被濫用？ | 速率限制與異常檢測 |
 
-## API 安全层级
+## API 安全層級
 
-### 第一层：传输安全
+### 第一層：傳輸安全
 
 ```typescript
-// 强制 HTTPS
+// 強制 HTTPS
 if (process.env.NODE_ENV === 'production') {
   if (request.headers.get('x-forwarded-proto') !== 'https') {
     return Response.redirect(`https://${request.headers.get('host')}${request.url}`)
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
-### 第二层：认证与授权
+### 第二層：認證與授權
 
 ```typescript
 // middleware.ts
@@ -53,19 +53,19 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
   
   if (!token) {
-    return Response.json({ error: '未授权' }, { status: 401 })
+    return Response.json({ error: '未授權' }, { status: 401 })
   }
   
-  // 检查权限
+  // 檢查權限
   if (request.nextUrl.pathname.startsWith('/api/admin')) {
     if (token.role !== 'admin') {
-      return Response.json({ error: '禁止访问' }, { status: 403 })
+      return Response.json({ error: '禁止訪問' }, { status: 403 })
     }
   }
 }
 ```
 
-### 第三层：输入验证
+### 第三層：輸入驗證
 
 ```typescript
 import { z } from 'zod'
@@ -82,17 +82,17 @@ export async function POST(request: Request) {
   const result = CreatePostSchema.safeParse(body)
   if (!result.success) {
     return Response.json(
-      { error: '参数错误', details: result.error.issues },
+      { error: '參數錯誤', details: result.error.issues },
       { status: 400 }
     )
   }
   
-  // 使用验证后的数据
+  // 使用驗證後的數據
   const { title, content, tags } = result.data
 }
 ```
 
-### 第四层：限流防护
+### 第四層：限流防護
 
 ```typescript
 import { Ratelimit } from '@upstash/ratelimit'
@@ -109,14 +109,14 @@ export async function middleware(request: NextRequest) {
   
   if (!success) {
     return Response.json(
-      { error: '请求过于频繁' },
+      { error: '請求過於頻繁' },
       { status: 429 }
     )
   }
 }
 ```
 
-## 安全响应头
+## 安全響應頭
 
 ```typescript
 // next.config.js
@@ -151,20 +151,20 @@ module.exports = {
 }
 ```
 
-## AI 协作提示
+## AI 協作提示
 
-向 AI 描述 API 安全需求时：
+向 AI 描述 API 安全需求時：
 
-- "实现请求限流，每个 IP 每分钟最多 60 次请求"
-- "对用户输入使用 zod 进行严格验证"
-- "添加 CORS 配置，只允许指定域名访问"
-- "在响应头中添加安全相关的 HTTP 头"
+- "實現請求限流，每個 IP 每分鐘最多 60 次請求"
+- "對用戶輸入使用 zod 進行嚴格驗證"
+- "添加 CORS 配置，只允許指定域名訪問"
+- "在響應頭中添加安全相關的 HTTP 頭"
 
-::: warning API 安全审查清单
-1. [ ] 所有接口都有认证检查
-2. [ ] 敏感操作有授权验证
-3. [ ] 用户输入经过验证和转义
-4. [ ] 实现了请求限流
-5. [ ] 配置了安全响应头
-6. [ ] 错误信息不泄露敏感信息
+::: warning API 安全審查清單
+1. [ ] 所有接口都有認證檢查
+2. [ ] 敏感操作有授權驗證
+3. [ ] 用戶輸入經過驗證和轉義
+4. [ ] 實現了請求限流
+5. [ ] 配置了安全響應頭
+6. [ ] 錯誤信息不泄露敏感信息
 :::
