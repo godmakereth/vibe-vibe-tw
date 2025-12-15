@@ -4,14 +4,14 @@ import { useRoute, useData } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import Giscus from '@giscus/vue'
 
-// 引入时间线样式
+// 引入時間線樣式
 import "vitepress-markdown-timeline/dist/theme/index.css";
-import './custom.css' // 稍后创建这个文件，用于微调样式
+import './custom.css' // 稍後創建這個文件，用於微調樣式
 
 export default {
   extends: DefaultTheme,
   
-  // 1. 布局扩展：注入 Giscus 评论
+  // 1. 佈局擴展：注入 Giscus 評論
   Layout: () => {
     const { frontmatter, isDark } = useData();
     
@@ -27,10 +27,10 @@ export default {
             fontSize: '14px',
             lineHeight: '1.5'
           }
-        }, '当前版本内部预览版，内容有待优化调整，并非正式发行版本，不代表最终品质')
+        }, '當前版本內部預覽版，內容有待優化調整，並非正式發行版本，不代表最終品質')
       },
       'doc-after': () => {
-        // 如果页面 Frontmatter 设置了 comment: false，则不显示评论
+        // 如果頁面 Frontmatter 設置了 comment: false，則不顯示評論
         if (frontmatter.value.comment === false) return null;
         
         return h('div', { style: { marginTop: '2rem' } }, [
@@ -53,20 +53,20 @@ export default {
     })
   },
 
-  // 2. 增强功能：图片放大
+  // 2. 增強功能：圖片放大
   setup() {
     const route = useRoute()
     
     const initZoom = () => {
-      // 给主要内容区的图片添加放大功能，排除 logo 等
-      // background: var(--vp-c-bg) 确保背景色适应深色模式
+      // 給主要內容區的圖片添加放大功能，排除 logo 等
+      // background: var(--vp-c-bg) 確保背景色適應深色模式
       mediumZoom('.main img', { background: 'var(--vp-c-bg)' })
     }
 
     onMounted(() => {
       initZoom()
       
-      // 动态计算 Banner 高度并设置 CSS 变量
+      // 動態計算 Banner 高度並設置 CSS 變量
       const updateBannerHeight = () => {
         const banner = document.querySelector('.info-banner')
         if (banner) {
@@ -79,7 +79,7 @@ export default {
       window.addEventListener('resize', updateBannerHeight)
     })
 
-    // 监听路由变化，确保切换页面后图片依然可以放大
+    // 監聽路由變化，確保切換頁面後圖片依然可以放大
     watch(
       () => route.path,
       () => nextTick(() => initZoom())
