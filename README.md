@@ -1,7 +1,12 @@
 # Vibe Vibe —— 人人都能學會的 AI 編程（Vibe Coding）指南
+
+> **📢 本倉庫為繁體中文版本** | [簡體中文原版](https://github.com/datawhalechina/vibe-vibe)
+
 > **面向零編程基礎學習者的 AI 輔助編程系統化教程，從「我有一個想法」到「我做出了一個產品」，讓人人都能成爲 Builder。**
 
-- 點擊以訪問教程主頁：www.vibevibe.cn 
+- 📖 點擊以訪問教程主頁：www.vibevibe.cn
+- 🌐 繁體中文版倉庫：https://github.com/godmakereth/vibe-vibe-tw
+- 📚 詳細專案說明：查看 [PROJECT_INFO.md](./PROJECT_INFO.md) 
 <!--
 <p align="center">
  <a href='https://mapmyvisitors.com/web/1c0yh'  title='Visit tracker'>
